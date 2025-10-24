@@ -5,118 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>YourGoatViper — Official</title>
 <style>
-/* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family:"Orbitron",sans-serif;
+  font-family:"Poppins",sans-serif;
   background:url('IMG_1703.jpeg') no-repeat center center/cover;
-  overflow-x:hidden;color:#fff;
+  color:#fff;
+  overflow-x:hidden;
 }
-
-/* ===== Overlay ===== */
 body::before{
   content:"";
   position:fixed;inset:0;
-  background:rgba(30,0,50,0.75);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(8px);
   z-index:-1;
 }
-
-/* ===== Header ===== */
 header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 60px;position:fixed;width:100%;top:0;z-index:10;
-  background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);
+  width:100%;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  position:fixed;
+  top:0;left:0;z-index:10;
 }
-.logo{
-  font-size:1.8rem;font-weight:800;color:#b366ff;text-shadow:0 0 10px #b366ff;
-}
+.logo{font-size:1.7rem;font-weight:700;color:#b365ff;}
 nav a{
-  margin:0 15px;color:#fff;text-decoration:none;
-  font-weight:600;transition:.3s;
+  margin:0 15px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+  transition:.3s;
 }
-nav a:hover{color:#b366ff;text-shadow:0 0 10px #b366ff;}
-
-/* ===== Hero ===== */
+nav a:hover{color:#b365ff;}
 .hero{
-  height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  text-align:center;
+  padding-top:60px;
 }
 .hero h1{
-  font-size:4rem;color:#b366ff;text-shadow:0 0 25px #b366ff;
+  font-size:4rem;
+  color:#b365ff;
+  margin-bottom:10px;
 }
 .hero p{
-  font-size:1.2rem;margin-top:10px;color:#eee;
+  font-size:1.3rem;
+  color:#ddd;
 }
 .hero button{
-  margin-top:25px;padding:12px 40px;border:none;
-  border-radius:8px;background:linear-gradient(135deg,#b366ff,#6e00ff);
-  color:#fff;font-weight:700;cursor:pointer;font-size:1.1rem;
-  box-shadow:0 0 15px #b366ff;transition:.3s;
+  margin-top:25px;
+  padding:12px 35px;
+  border:none;
+  background:linear-gradient(135deg,#b365ff,#6e00ff);
+  color:#fff;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
 }
 .hero button:hover{transform:scale(1.05);}
-
-/* ===== Modal ===== */
 .modal{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);
-  justify-content:center;align-items:center;backdrop-filter:blur(6px);z-index:200;
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(6px);
+  justify-content:center;
+  align-items:center;
+  z-index:100;
 }
 .modal.active{display:flex;}
 .form-box{
-  width:380px;padding:30px;border-radius:12px;
-  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);
-  box-shadow:0 0 30px #6e00ff;
+  width:380px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:12px;
+  padding:30px;
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
 }
-.form-box h2{text-align:center;margin-bottom:15px;color:#b366ff;}
+.form-box h2{
+  color:#fff;
+  text-align:center;
+  margin-bottom:20px;
+}
 .form-box input{
-  width:100%;padding:10px;margin-bottom:15px;
-  background:rgba(255,255,255,0.1);border:none;border-radius:6px;
+  width:100%;
+  padding:10px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:6px;
+  background:rgba(255,255,255,0.1);
   color:#fff;
 }
 .form-box button{
-  width:100%;padding:10px;background:linear-gradient(135deg,#b366ff,#6e00ff);
-  border:none;border-radius:6px;color:#fff;font-weight:700;cursor:pointer;
+  width:100%;
+  padding:10px;
+  background:linear-gradient(135deg,#b365ff,#6e00ff);
+  border:none;
+  border-radius:6px;
+  font-weight:600;
+  color:#fff;
+  cursor:pointer;
 }
-.form-box .switch{text-align:center;margin-top:10px;font-size:.9rem;}
-.form-box .switch a{color:#b366ff;text-decoration:none;}
-.form-box .switch a:hover{text-decoration:underline;}
-
-/* ===== Dashboard ===== */
-.dashboard{display:none;text-align:center;padding:120px 20px;}
+.form-box .switch{
+  text-align:center;
+  margin-top:15px;
+  font-size:0.9rem;
+}
+.form-box .switch a{color:#b365ff;text-decoration:none;}
+.dashboard{
+  display:none;
+  text-align:center;
+  padding:120px 20px;
+}
 .dashboard.active{display:block;}
-.dashboard h2{color:#b366ff;text-shadow:0 0 15px #b366ff;}
+.dashboard h2{color:#b365ff;margin-bottom:10px;}
+.dashboard p{color:#eee;margin-bottom:30px;}
 .section{
   background:rgba(255,255,255,0.05);
-  padding:20px;margin:25px auto;max-width:700px;
-  border-radius:10px;text-align:left;
-  box-shadow:0 0 15px rgba(179,102,255,0.3);
+  padding:20px;
+  margin:20px auto;
+  max-width:700px;
+  border-radius:10px;
+  text-align:left;
 }
-
-/* ===== Tournament List ===== */
 .tournament-list li{
-  list-style:none;margin:8px 0;padding:8px;
-  background:rgba(255,255,255,0.05);border-radius:8px;
+  margin:8px 0;
+  background:rgba(255,255,255,0.05);
+  padding:10px;
+  border-radius:8px;
+  list-style:none;
 }
-
-/* ===== Contact & About ===== */
-#about,#contact{display:none;padding:120px 20px;max-width:700px;margin:auto;}
-#about.active,#contact.active{display:block;}
+footer{text-align:center;padding:20px;color:#aaa;}
+#contact,#about{
+  display:none;
+  padding:120px 20px;
+  max-width:700px;
+  margin:auto;
+}
+#contact.active,#about.active{display:block;}
 .link-list a{
-  display:flex;align-items:center;gap:10px;
-  margin:10px 0;text-decoration:none;color:#b366ff;
+  display:block;
+  margin:6px 0;
+  color:#b365ff;
+  text-decoration:none;
 }
 .link-list a:hover{text-decoration:underline;}
-
-/* ===== Footer ===== */
-footer{text-align:center;padding:20px;color:#aaa;}
-
-/* ===== Glow Animation ===== */
-@keyframes pulse{
-  0%{text-shadow:0 0 5px #b366ff;}
-  50%{text-shadow:0 0 25px #b366ff;}
-  100%{text-shadow:0 0 5px #b366ff;}
-}
-.logo, .hero h1{animation:pulse 3s infinite;}
 </style>
 </head>
 <body>
@@ -133,35 +171,38 @@ footer{text-align:center;padding:20px;color:#aaa;}
 
 <section class="hero" id="home">
   <h1>Welcome to YourGoatViper</h1>
-  <p>Official Website of the PUBG Creator, Editor & Tournament Organizer</p>
-  <button id="openLogin">Enter Arena</button>
+  <p>Official Website of the PUBG Creator & Tournament Organizer</p>
+  <button id="openLogin">Login / Register</button>
 </section>
 
-<!-- LOGIN / REGISTER -->
 <div class="modal" id="authModal">
-  <div class="form-box" id="registerForm">
+  <div class="form-box" id="signupForm">
     <h2>Create Account</h2>
-    <input type="text" id="regUsername" placeholder="Username">
-    <input type="email" id="regEmail" placeholder="Email">
-    <input type="password" id="regPasscode" placeholder="Enter Passcode">
-    <button id="createBtn">Register</button>
-    <div class="switch">Already have an account? <a href="#" id="showLogin">Login</a></div>
-    <div class="switch"><a href="#" id="buyPass">Buy Passcode 🔥</a></div>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="text" id="passcode" placeholder="Enter Passcode" />
+    <button id="createAccount">Create Account</button>
+    <div class="switch">
+      Already have an account? <a href="#" id="alreadyAccount">Login</a>
+    </div>
+    <div class="switch">
+      <a href="#" id="buyPass">Buy Passcode</a>
+    </div>
   </div>
 
   <div class="form-box" id="loginForm" style="display:none;">
     <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="text" id="loginUsername" placeholder="Username">
-    <input type="password" id="loginPasscode" placeholder="Enter Passcode">
+    <input type="email" id="loginEmail" placeholder="Email" />
+    <input type="text" id="loginPasscode" placeholder="Enter Passcode" />
     <button id="loginBtn">Login</button>
-    <div class="switch"><a href="#" id="backRegister">Create New Account</a></div>
+    <div class="switch">
+      <a href="#" id="backSignup">Create New Account</a>
+    </div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <section class="dashboard" id="dashboard">
-  <h2>Welcome, <span id="userName"></span> 👑</h2>
+  <h2>Welcome, <span id="userName"></span> 👋</h2>
   <p>Entry Date: 24 Oct – 30 Oct</p>
 
   <div class="section">
@@ -172,122 +213,86 @@ footer{text-align:center;padding:20px;color:#aaa;}
       <li>Prize Pool: 5K + International Entry</li>
     </ul>
   </div>
-  <button id="logoutBtn" style="padding:10px 30px;border:none;background:#b366ff;color:#fff;border-radius:6px;font-weight:700;">Logout</button>
+  <button id="logoutBtn" style="margin-top:20px;">Logout</button>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <h2>About</h2>
-  <p>
-  Meet <strong>YourGoatViper</strong>, a force to be reckoned with in the PUBG universe!  
+  <p>Meet <strong>YourGoatViper</strong>, a force to be reckoned with in the PUBG universe!  
   As a talented content creator, professional TDM player, live streamer, and skilled editor,  
   YourGoatViper brings the heat with every match and edit.  
-  With a keen eye for detail and a knack for entertaining gameplay,  
-  YourGoatViper has built a loyal following across platforms.  
-  Get ready to join the action-packed world of <strong>YourGoatViper</strong>!
-  </p>
+  Join the action-packed world of <strong>YourGoatViper</strong>!</p>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <div class="link-list">
-    <a href="https://www.instagram.com/arham_arain333" target="_blank">📸 Instagram</a>
-    <a href="https://www.tiktok.com/@yourgoatviper" target="_blank">🎵 TikTok</a>
-    <a href="https://www.youtube.com/@YourGoatViper" target="_blank">▶️ YouTube</a>
-    <a href="https://www.snapchat.com/add/aarain21553" target="_blank">👻 Snapchat</a>
-    <a href="https://wa.me/923348666640" target="_blank">💬 WhatsApp</a>
-    <a href="mailto:arhamarain060@gmail.com">📧 Email: arhamarain060@gmail.com</a>
+    <a href="https://www.instagram.com/arham_arain333" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@yourgoatviper" target="_blank">TikTok</a>
+    <a href="https://www.youtube.com/@YourGoatViper" target="_blank">YouTube</a>
+    <a href="https://www.snapchat.com/add/aarain21553" target="_blank">Snapchat</a>
+    <a href="https://wa.me/923348666640" target="_blank">WhatsApp</a>
+    <a href="mailto:arhamarain060@gmail.com">Email</a>
   </div>
 </section>
 
 <footer>© 2025 YourGoatViper | All Rights Reserved</footer>
 
-<!-- ===== SOUND & SCRIPT ===== -->
 <script>
-// ===== SOUNDS =====
-// Replace with your own .mp3 or .wav files if needed
-const clickSound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_5865cf93f5.mp3?filename=click.mp3');
-const hoverSound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f6a63b3f8.mp3?filename=hover.mp3');
-const bgMusic = new Audio('https://cdn.pixabay.com/download/audio/2023/02/23/audio_c3f6a62b6b.mp3?filename=cyberpunk-2077-style-intro-music-14099.mp3');
-bgMusic.loop = true;
-bgMusic.volume = 0.4;
-
-// ===== Elements =====
+const openLogin=document.getElementById('openLogin');
 const modal=document.getElementById('authModal');
-const registerForm=document.getElementById('registerForm');
+const signupForm=document.getElementById('signupForm');
 const loginForm=document.getElementById('loginForm');
 const dashboard=document.getElementById('dashboard');
 const home=document.getElementById('home');
 const about=document.getElementById('about');
 const contact=document.getElementById('contact');
-const userName=document.getElementById('userName');
 
-// ===== Sounds Trigger =====
-document.querySelectorAll('button,a').forEach(el=>{
-  el.addEventListener('mouseenter',()=>hoverSound.play());
-  el.addEventListener('click',()=>clickSound.play());
-});
-
-// ===== Open Modal =====
-document.getElementById('openLogin').onclick=()=>{modal.classList.add('active');bgMusic.play();}
+openLogin.onclick=()=>modal.classList.add('active');
 document.getElementById('nav-login').onclick=()=>modal.classList.add('active');
 window.onclick=e=>{if(e.target===modal)modal.classList.remove('active');}
 
-// ===== Switch =====
-document.getElementById('showLogin').onclick=()=>{registerForm.style.display="none";loginForm.style.display="block";}
-document.getElementById('backRegister').onclick=()=>{loginForm.style.display="none";registerForm.style.display="block";}
+document.getElementById('alreadyAccount').onclick=()=>{signupForm.style.display="none";loginForm.style.display="block";}
+document.getElementById('backSignup').onclick=()=>{loginForm.style.display="none";signupForm.style.display="block";}
 
-// ===== Buy Pass =====
 document.getElementById('buyPass').onclick=()=>{
+  alert("Buy your passcode via WhatsApp: +92 334 8666640");
   window.open("https://wa.me/923348666640","_blank");
-  window.open("https://www.instagram.com/arham_arain333","_blank");
 };
 
-// ===== Create Account =====
-document.getElementById('createBtn').onclick=()=>{
-  const u=document.getElementById('regUsername').value.trim();
-  const e=document.getElementById('regEmail').value.trim();
-  const p=document.getElementById('regPasscode').value.trim();
-  if(!u||!e||!p)return alert("Fill all fields!");
-  if(p!=="YourGoatViper-Tournament-2n7RHJL3X0mHrbpF" && p!=="YoutGoatViper-Tour-pass-2n7RHJL3X0mHrbpF") return alert("Invalid Passcode!");
-  localStorage.setItem(e,JSON.stringify({username:u,passcode:p}));
-  alert("Account created! You can now login.");
-  registerForm.style.display="none";
-  loginForm.style.display="block";
+document.getElementById('createAccount').onclick=()=>{
+  const name=document.getElementById('username').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const pass=document.getElementById('passcode').value.trim();
+  if(!name||!email||!pass)return alert("Fill all fields!");
+  if(pass==="YourGoatViper-Tournament-2n7RHJL3X0mHrbpF" || pass==="YourGoatViper-Tour-pass-2n7RHJL3X0mHrbpF"){
+    localStorage.setItem(email,JSON.stringify({name,pass}));
+    alert("Account created successfully!");
+    signupForm.style.display="none";
+    loginForm.style.display="block";
+  }else alert("Invalid passcode!");
 };
 
-// ===== Login =====
 document.getElementById('loginBtn').onclick=()=>{
-  const e=document.getElementById('loginEmail').value.trim();
-  const u=document.getElementById('loginUsername').value.trim();
-  const p=document.getElementById('loginPasscode').value.trim();
-  const data=JSON.parse(localStorage.getItem(e));
-  if(data && data.username===u && data.passcode===p){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPasscode').value.trim();
+  const user=JSON.parse(localStorage.getItem(email));
+  if(user && (pass===user.pass)){
     modal.classList.remove('active');
     home.style.display="none";
     dashboard.classList.add('active');
-    userName.textContent=u;
-    bgMusic.play();
-  }else alert("Invalid details!");
+    document.getElementById('userName').textContent=user.name;
+  }else alert("Invalid email or passcode!");
 };
 
-// ===== Logout =====
 document.getElementById('logoutBtn').onclick=()=>{
   dashboard.classList.remove('active');
   home.style.display="flex";
 };
 
-// ===== Navigation =====
-document.getElementById('nav-home').onclick=()=>{
-  home.style.display="flex";about.classList.remove('active');contact.classList.remove('active');dashboard.classList.remove('active');
-};
-document.getElementById('nav-about').onclick=()=>{
-  about.classList.add('active');contact.classList.remove('active');home.style.display="none";dashboard.classList.remove('active');
-};
-document.getElementById('nav-contact').onclick=()=>{
-  contact.classList.add('active');about.classList.remove('active');home.style.display="none";dashboard.classList.remove('active');
-};
+document.getElementById('nav-home').onclick=()=>{home.style.display="flex";about.classList.remove('active');contact.classList.remove('active');dashboard.classList.remove('active');};
+document.getElementById('nav-about').onclick=()=>{about.classList.add('active');home.style.display="none";contact.classList.remove('active');dashboard.classList.remove('active');};
+document.getElementById('nav-contact').onclick=()=>{contact.classList.add('active');home.style.display="none";about.classList.remove('active');dashboard.classList.remove('active');};
 </script>
 
 </body>
