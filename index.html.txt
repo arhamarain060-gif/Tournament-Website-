@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YourGoatViper — Login (Fixed)</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins",sans-serif}
+  html,body{height:100%;background:#000;color:#fff}
+  .bg{
+    position:fixed;inset:0;
+    background:url("IMG_1703.jpeg") center/cover no-repeat;
+    filter:blur(8px) brightness(.55);
+    z-index:-1;
+  }
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+  .card{
+    width:360px;background:rgba(255,255,255,.06);backdrop-filter:blur(10px);
+    border-radius:14px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;
+  }
+
+  h1{color:#c88cff;margin-bottom:6px;font-size:26px}
+  .sub{color:#dcdcff;font-size:13px;margin-bottom:16px}
+
+  input[type="email"], input[type="text"]{
+    width:100%;padding:10px 12px;border-radius:8px;border:none;margin:8px 0;background:rgba(255,255,255,0.06);color:#fff;
+    font-size:14px;
+  }
+  button.primary{
+    width:100%;padding:10px;border-radius:8px;border:none;background:linear-gradient(135deg,#a020f0,#6a00b9);
+    color:#fff;font-weight:700;cursor:pointer;margin-top:8px;
+  }
+  button.secondary{
+    margin-top:12px;padding:8px 12px;border-radius:8px;background:transparent;border:1px solid #b77cff;color:#b77cff;cursor:pointer;
+  }
+  .icons{margin-top:12px;display:flex;gap:12px;align-items:center;justify-content:center}
+  .icon{width:40px;height:40px;display:inline-block;cursor:pointer;filter:drop-shadow(0 6px 18px rgba(0,0,0,.6))}
+  .hidden{display:none}
+  #message{margin-top:12px;font-weight:600}
+  /* Dashboard after login */
+  .dashboard{display:none;margin-top:16px;text-align:left;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px}
+  .dashboard h3{color:#b88cff;margin-bottom:6px}
+  .small{font-size:13px;color:rgba(255,255,255,.8)}
+  a.icon-link{display:inline-block}
+  @media(max-width:420px){.card{width:92%}}
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <h1 id="title">YourGoatViper</h1>
+      <div class="sub">Official Tournament Access</div>
+
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label class="sr-only" for="email">Email</label>
+        <input id="email" type="email" placeholder="Enter your email" required />
+
+        <label class="sr-only" for="passcode">Passcode</label>
+        <input id="passcode" type="text" placeholder="Enter your passcode" required inputmode="text" />
+
+        <button class="primary" type="submit" id="loginBtn">Login</button>
+      </form>
+
+      <div class="extra">
+        <button id="buyPassBtn" class="secondary" type="button">Buy Passcode</button>
+
+        <div id="contactIcons" class="icons hidden" aria-hidden="true">
+          <!-- WhatsApp icon (click opens DM) -->
+          <a class="icon-link" id="waLink" href="https://wa.me/923348666640" target="_blank" rel="noopener noreferrer" title="Message on WhatsApp">
+            <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+          </a>
+
+          <!-- Instagram icon -->
+          <a class="icon-link" id="igLink" href="https://www.instagram.com/arham_arain333?igsh=NGhobDk1c29rd3oy&utm_source=qr" target="_blank" rel="noopener noreferrer" title="Instagram">
+            <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+
+      <div id="message" role="status" aria-live="polite"></div>
+
+      <div class="dashboard" id="dashboard">
+        <h3>Welcome</h3>
+        <div class="small"><strong>Entry dates:</strong> 24 October — 30 October</div>
+        <div class="small" style="margin-top:6px"><strong>Tournament:</strong> 4 November — 7 November</div>
+        <div class="small" style="margin-top:8px"><strong>Pass used:</strong> <span id="usedPass"></span></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  (function(){
+    // Elements
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passInput = document.getElementById('passcode');
+    const message = document.getElementById('message');
+    const buyBtn = document.getElementById('buyPassBtn');
+    const icons = document.getElementById('contactIcons');
+    const dashboard = document.getElementById('dashboard');
+    const usedPassSpan = document.getElementById('usedPass');
+
+    // Allowed passcodes (exact strings)
+    const validPasscodes = [
+      "YourGoatViper-Tournament-2n7RHJL3X0mHrbpF",
+      "YourGoatViper-Tour-pass-2n7RHJL3X0mHrbpF"
+    ];
+
+    // Simple email validator
+    function isValidEmail(e){
+      // basic check: contains "@" and a dot after @
+      if(!e) return false;
+      const at = e.indexOf('@');
+      if(at < 1) return false;
+      const dot = e.indexOf('.', at+2);
+      return dot > at+1 && dot < e.length - 1;
+    }
+
+    // Clear previous messages
+    function clearMessage(){
+      message.textContent = '';
+      message.style.color = '';
+    }
+
+    // On submit
+    form.addEventListener('submit', function(evt){
+      evt.preventDefault();
+      clearMessage();
+
+      const email = emailInput.value.trim();
+      const pass = passInput.value.trim();
+
+      // Validate email
+      if(!isValidEmail(email)){
+        message.style.color = '#ff7b7b';
+        message.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      // Validate passcode not empty
+      if(!pass){
+        message.style.color = '#ff7b7b';
+        message.textContent = 'Please enter your passcode.';
+        return;
+      }
+
+      // Check passcode validity
+      if(validPasscodes.includes(pass)){
+        // success
+        message.style.color = '#7eff8b';
+        message.textContent = '✅ Login successful — welcome!';
+
+        // reveal dashboard info
+        usedPassSpan.textContent = pass;
+        dashboard.style.display = 'block';
+
+        // optionally clear fields
+        // emailInput.value = '';
+        // passInput.value = '';
+      } else {
+        message.style.color = '#ff7b7b';
+        message.textContent = '❌ Invalid passcode. Click "Buy Passcode" to contact on WhatsApp.';
+        dashboard.style.display = 'none';
+      }
+    });
+
+    // Buy passcode toggle
+    buyBtn.addEventListener('click', function(){
+      if(icons.classList.contains('hidden')){
+        icons.classList.remove('hidden');
+        icons.setAttribute('aria-hidden','false');
+        buyBtn.textContent = 'Hide Contacts';
+      } else {
+        icons.classList.add('hidden');
+        icons.setAttribute('aria-hidden','true');
+        buyBtn.textContent = 'Buy Passcode';
+      }
+    });
+
+    // Accessibility: press Enter in pass input triggers submit naturally
+
+    // Pre-focus email for convenience
+    emailInput.focus();
+  })();
+</script>
+</body>
+</html>
