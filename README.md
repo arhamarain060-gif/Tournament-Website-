@@ -1,222 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YourGoatViper — Tournament Login</title>
-  <style>
-    /* ---------- Global ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    html, body {
-      height: 100%;
-      background: #000;
-      color: #fff;
-    }
-
-    /* ---------- Background ---------- */
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url("IMG_1703.jpeg") no-repeat center center/cover;
-      filter: blur(8px) brightness(0.5);
-      z-index: -1;
-    }
-
-    /* ---------- Container ---------- */
-    .login-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 340px;
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      backdrop-filter: blur(10px);
-      animation: fadeIn 0.8s ease-in-out;
-    }
-
-    .login-container h1 {
-      font-size: 28px;
-      color: #c88cff;
-      font-weight: 700;
-    }
-
-    .login-container p {
-      font-size: 13px;
-      color: #bbb;
-      margin-top: 4px;
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 6px;
-      outline: none;
-      font-size: 14px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-      background: linear-gradient(135deg, #a020f0, #6a00b9);
-      color: #fff;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    button:hover {
-      background: linear-gradient(135deg, #7d00cc, #4b0099);
-      transform: translateY(-2px);
-    }
-
-    /* ---------- Extra Options ---------- */
-    .extra {
-      margin-top: 20px;
-    }
-
-    #buyPassBtn {
-      background: transparent;
-      border: 1px solid #b77cff;
-      color: #b77cff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    #buyPassBtn:hover {
-      background: #b77cff;
-      color: #fff;
-    }
-
-    /* ---------- Contact Icons ---------- */
-    #contactIcons {
-      margin-top: 12px;
-    }
-
-    .icon {
-      width: 38px;
-      height: 38px;
-      margin: 0 8px;
-      cursor: pointer;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
-      transition: transform 0.3s ease;
-    }
-
-    .icon:hover {
-      transform: scale(1.1);
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* ---------- Message ---------- */
-    #message {
-      margin-top: 15px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* ---------- Animation ---------- */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 480px) {
-      .login-container {
-        width: 85%;
-        padding: 30px;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YourGoatViper — Official</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:"Poppins",sans-serif;
+  background:url('IMG_1750.png') no-repeat center center/cover;
+  color:#fff;overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:rgba(45,0,85,0.65);
+  backdrop-filter:blur(10px);
+  z-index:-1;
+}
+header{
+  width:100%;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  position:fixed;
+  top:0;left:0;z-index:10;
+}
+.logo{font-size:1.5rem;font-weight:700;color:#b365ff;}
+nav a{
+  margin:0 15px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+  transition:.3s;
+}
+nav a:hover{color:#b365ff;}
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  text-align:center;
+  padding-top:60px;
+}
+.hero h1{font-size:4rem;color:#b365ff;margin-bottom:10px;}
+.hero p{font-size:1.2rem;color:#eee;}
+.hero button{
+  margin-top:20px;padding:10px 30px;border:none;
+  background:linear-gradient(135deg,#b365ff,#6e00ff);
+  color:#fff;border-radius:6px;font-weight:600;cursor:pointer;transition:.3s;
+}
+.hero button:hover{transform:scale(1.05);}
+.modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(6px);justify-content:center;align-items:center;z-index:100;
+}
+.modal.active{display:flex;}
+.form-box{
+  width:380px;background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:30px;
+  box-shadow:0 0 30px rgba(0,0,0,0.6);text-align:center;
+}
+.form-box h2{color:#fff;margin-bottom:20px;}
+.form-box input{
+  width:100%;padding:10px;margin-bottom:15px;border:none;border-radius:6px;
+  background:rgba(255,255,255,0.1);color:#fff;
+}
+.form-box input::placeholder{color:#ccc;}
+.form-box button{
+  width:100%;padding:10px;background:linear-gradient(135deg,#b365ff,#6e00ff);
+  border:none;border-radius:6px;font-weight:600;color:#fff;cursor:pointer;
+}
+.form-box .switch{margin-top:15px;font-size:0.9rem;color:#b365ff;cursor:pointer;}
+.whatsapp-links{
+  display:none;margin-top:15px;
+}
+.whatsapp-links a{
+  margin:0 10px;display:inline-block;
+}
+.whatsapp-links img{
+  width:40px;height:40px;border-radius:50%;transition:transform .3s;
+}
+.whatsapp-links img:hover{transform:scale(1.1);}
+.dashboard{
+  display:none;text-align:center;padding:120px 20px;
+}
+.dashboard.active{display:block;}
+.dashboard h2{color:#b365ff;margin-bottom:10px;}
+.section{
+  background:rgba(255,255,255,0.05);padding:20px;margin:20px auto;
+  max-width:700px;border-radius:10px;text-align:left;
+}
+.tournament-list li{
+  margin:8px 0;background:rgba(255,255,255,0.05);
+  padding:10px;border-radius:8px;list-style:none;
+}
+footer{text-align:center;padding:20px;color:#aaa;}
+#about,#contact{display:none;padding:120px 20px;max-width:700px;margin:auto;}
+#about.active,#contact.active{display:block;}
+.link-list a{
+  display:block;margin:6px 0;color:#b365ff;text-decoration:none;
+}
+.link-list a:hover{text-decoration:underline;}
+</style>
 </head>
 <body>
 
-  <div class="background"></div>
+<header>
+  <div class="logo">YourGoatViper</div>
+  <nav>
+    <a href="#" id="nav-home">Home</a>
+    <a href="#" id="nav-about">About</a>
+    <a href="#" id="nav-contact">Contact</a>
+    <a href="#" id="nav-login">Login</a>
+  </nav>
+</header>
 
-  <div class="login-container">
-    <h1>YourGoatViper</h1>
-    <p>Official Tournament Login</p>
+<section class="hero" id="home">
+  <h1>Welcome to YourGoatViper</h1>
+  <p>Official Tournament & Gaming Hub</p>
+  <button id="openLogin">Enter Tournament</button>
+</section>
 
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Enter your email" required />
-      <input type="text" id="passcode" placeholder="Enter your passcode" required />
-      <button type="submit">Login</button>
-    </form>
+<div class="modal" id="authModal">
+  <div class="form-box" id="loginForm">
+    <h2>Enter Tournament Passcode</h2>
+    <input type="text" id="passcode" placeholder="Enter Passcode" />
+    <button id="loginBtn">Submit</button>
+    <div class="switch" id="buyPass">Buy Passcode 🔑</div>
 
-    <div class="extra">
-      <button id="buyPassBtn">Buy Passcode</button>
-      <div id="contactIcons" class="hidden">
-        <a href="https://wa.me/923348666640" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="icon" alt="WhatsApp" />
-        </a>
-        <a href="https://www.instagram.com/arham_arain333?igsh=NGhobDk1c29rd3oy&utm_source=qr" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="icon" alt="Instagram" />
-        </a>
-      </div>
+    <div class="whatsapp-links" id="socialLinks">
+      <a href="https://wa.me/923348666640" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      </a>
+      <a href="https://www.instagram.com/arham_arain333?igsh=NGhobDk1c29rd3oy&utm_source=qr" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      </a>
     </div>
-
-    <p id="message"></p>
   </div>
+</div>
 
-  <script>
-    const form = document.getElementById("loginForm");
-    const message = document.getElementById("message");
-    const buyBtn = document.getElementById("buyPassBtn");
-    const contactIcons = document.getElementById("contactIcons");
+<section class="dashboard" id="dashboard">
+  <h2>Welcome, Warrior 👑</h2>
+  <p>Entry Date: 24 Oct – 30 Oct</p>
+  <div class="section">
+    <h3>🏆 Tournament Details</h3>
+    <ul class="tournament-list">
+      <li><strong>International Tournament:</strong> 4 Nov – 7 Nov</li>
+      <li>Entry Fee: 200 PKR</li>
+      <li>Prize Pool: 5K + International Entry</li>
+    </ul>
+  </div>
+  <button id="logoutBtn" style="margin-top:20px;">Logout</button>
+</section>
 
-    // Valid passcodes
-    const validPasscodes = [
-      "YourGoatViper-Tournament-2n7RHJL3X0mHrbpF",
-      "YourGoatViper-Tour-pass-2n7RHJL3X0mHrbpF"
-    ];
+<section id="about">
+  <h2>About</h2>
+  <p><strong>YourGoatViper</strong> — PUBG Creator, Pro TDM Player, Streamer & Editor.  
+     Join the action-packed tournaments and experience the best of mobile esports.</p>
+</section>
 
-    // Login check
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const passcode = document.getElementById("passcode").value.trim();
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="link-list">
+    <a href="https://www.instagram.com/arham_arain333?igsh=NGhobDk1c29rd3oy&utm_source=qr" target="_blank">Instagram</a>
+    <a href="https://wa.me/923348666640" target="_blank">WhatsApp</a>
+  </div>
+</section>
 
-      if (validPasscodes.includes(passcode)) {
-        message.style.color = "#7eff8b";
-        message.textContent = "✅ Login Successful! Welcome to the YourGoatViper Tournament!";
-      } else {
-        message.style.color = "#ff7070";
-        message.textContent = "❌ Invalid Passcode. Please buy a valid one.";
-      }
-    });
+<footer>© 2025 YourGoatViper | All Rights Reserved</footer>
 
-    // Show WhatsApp & Insta icons
-    buyBtn.addEventListener("click", () => {
-      contactIcons.classList.toggle("hidden");
-    });
-  </script>
+<script>
+const modal=document.getElementById('authModal');
+const openLogin=document.getElementById('openLogin');
+const navLogin=document.getElementById('nav-login');
+const loginBtn=document.getElementById('loginBtn');
+const dashboard=document.getElementById('dashboard');
+const home=document.getElementById('home');
+const buyPass=document.getElementById('buyPass');
+const socialLinks=document.getElementById('socialLinks');
+const navHome=document.getElementById('nav-home');
+const navAbout=document.getElementById('nav-about');
+const navContact=document.getElementById('nav-contact');
+const about=document.getElementById('about');
+const contact=document.getElementById('contact');
+
+const validPasscodes=[
+  "YourGoatViper-Tournament-2n7RHJL3X0mHrbpF",
+  "YourGoatViper-Tour-pass-2n7RHJL3X0mHrbpF"
+];
+
+openLogin.onclick=()=>modal.classList.add('active');
+navLogin.onclick=()=>modal.classList.add('active');
+window.onclick=e=>{if(e.target===modal)modal.classList.remove('active');}
+
+buyPass.onclick=()=>{
+  socialLinks.style.display = socialLinks.style.display === "block" ? "none" : "block";
+};
+
+loginBtn.onclick=()=>{
+  const pass=document.getElementById('passcode').value.trim();
+  if(validPasscodes.includes(pass)){
+    modal.classList.remove('active');
+    home.style.display="none";
+    dashboard.classList.add('active');
+  } else alert("Invalid Passcode! ❌");
+};
+
+document.getElementById('logoutBtn').onclick=()=>{
+  dashboard.classList.remove('active');
+  home.style.display="flex";
+};
+
+navHome.onclick=()=>{
+  home.style.display="flex";
+  about.classList.remove('active');
+  contact.classList.remove('active');
+  dashboard.classList.remove('active');
+};
+navAbout.onclick=()=>{
+  about.classList.add('active');
+  contact.classList.remove('active');
+  home.style.display="none";
+  dashboard.classList.remove('active');
+};
+navContact.onclick=()=>{
+  contact.classList.add('active');
+  about.classList.remove('active');
+  home.style.display="none";
+  dashboard.classList.remove('active');
+};
+</script>
 </body>
 </html>
