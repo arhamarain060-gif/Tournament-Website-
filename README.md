@@ -192,6 +192,34 @@ nav a:hover::after { width: 100%; }
 }
 .tournament-dates li:hover { transform: translateX(5px); }
 
+/* Tournament Registration & Leaderboard */
+.tournament-registration input, .tournament-registration select, .tournament-registration button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.tournament-registration button {
+  background: linear-gradient(135deg, #b365ff, #6e00ff);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.tournament-registration button:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(179,101,255,0.4);}
+.leaderboard #registrationsList .registration-card {
+  background: rgba(255,255,255,0.05);
+  margin: 8px 0;
+  padding: 10px;
+  border-left: 4px solid #b365ff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Sections */
 #contact, #about {
   display: none;
@@ -279,6 +307,34 @@ footer { text-align: center; padding: 20px; color: #aaa; background: rgba(0,0,0,
       <li>Prize Pool: 5K + International Entry</li>
     </ul>
   </div>
+
+  <!-- Tournament Registration -->
+  <div class="section tournament-registration">
+    <h3>Register for Tournament</h3>
+    <form id="tournamentForm">
+      <label>PUBG In-Game Name:</label>
+      <input type="text" id="pubgName" placeholder="Enter PUBG username" required>
+
+      <label>Device:</label>
+      <select id="device" required>
+        <option value="">Select Device</option>
+        <option value="Android">Android</option>
+        <option value="iOS">iOS</option>
+      </select>
+
+      <label>Slots (1-4):</label>
+      <input type="number" id="slots" min="1" max="4" placeholder="Number of slots" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- Leaderboard -->
+  <div class="section leaderboard">
+    <h3>Leaderboard</h3>
+    <div id="registrationsList"></div>
+  </div>
+
   <button id="logoutBtn" style="margin-top:20px; padding:10px 20px; border-radius:8px;">Logout</button>
 </section>
 
@@ -392,6 +448,7 @@ function showDashboard(username){
     homeSection.style.display="none";
     aboutSection.style.display="none";
     contactSection.style.display="none";
+    renderLeaderboard();
 }
 
 // Logout
@@ -407,6 +464,39 @@ navAbout.addEventListener("click", ()=>{clickSound.play(); homeSection.style.dis
 navContact.addEventListener("click", ()=>{clickSound.play(); homeSection.style.display="none"; aboutSection.style.display="none"; contactSection.style.display="block"; dashboard.classList.remove("active");});
 navLogin.addEventListener("click", ()=>{clickSound.play(); authModal.classList.add("active");});
 
+// Tournament Registration
+let registrations = JSON.parse(localStorage.getItem("registrations") || "[]");
+
+document.getElementById("tournamentForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  clickSound.play();
+  const name = document.getElementById("pubgName").value.trim();
+  const device = document.getElementById("device").value;
+  const slots = parseInt(document.getElementById("slots").value);
+  if(!name || !device || !slots) return alert("Fill all fields!");
+  registrations.push({ name, device, slots });
+  localStorage.setItem("registrations", JSON.stringify(registrations));
+  alert("Registered successfully!");
+  renderLeaderboard();
+  document.getElementById("tournamentForm").reset();
+});
+
+// Render Leaderboard
+function renderLeaderboard(){
+  const list = document.getElementById("registrationsList");
+  list.innerHTML = "";
+  if(registrations.length===0){ list.innerHTML="<p>No registrations yet.</p>"; return; }
+  registrations.forEach((reg,i)=>{
+    const div = document.createElement("div");
+    div.classList.add("registration-card");
+    div.innerHTML = `<span>${i+1}. ${reg.name}</span> <span>${reg.device} | Slots: ${reg.slots}</span>`;
+    list.appendChild(div);
+  });
+}
+
+// On page load, show dashboard if user is logged in
+const currentUser = getUser();
+if(currentUser) showDashboard(currentUser.username);
 </script>
 
 </body>
